@@ -1,0 +1,40 @@
+{% extends 'user_base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>普通资信</h5>
+                <div class="ibox-tools">
+                    <a href="/user/req_form" class="btn btn-primary btn-xs">提交新资信</a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>提交时间</th>
+                            <th>内容</th>
+                            <th>结果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {% for o in list %}
+                        <tr>
+                            <td>{{o.id}}</td>
+                            <td>{{o.create_time}}</td>
+                            <td>{{o.content}}</td>
+                            <td>23</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}

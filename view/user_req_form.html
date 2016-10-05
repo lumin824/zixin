@@ -1,0 +1,121 @@
+{% extends 'user_base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>普通资信</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="form-horizontal" action="" method="post">
+
+                  <div class="form-group">
+                      <label class="col-sm-2 control-label">税务系统</label>
+
+                      <div class="col-sm-10">
+                          <select class="form-control m-b" name="account">
+                              <option value="">请选择</option>
+                              <option>江苏国税</option>
+                              <option>浙江国税</option>
+                              <option>上海国税</option>
+                              <option>北京国税</option>
+                              <option>山东国税</option>
+                              <option>安徽国税</option>
+                              <option>四川国税</option>
+                          </select>
+                      </div>
+                  </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">登录账号</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="username" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">登录密码</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="password" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-2">
+                          <div class="checkbox i-checks">
+                              <label>
+                                  <input type="checkbox" value=""> <i></i> 我已经认真阅读并同意《H+使用协议》</label>
+                          </div>
+                        </div>
+                    </div>
+
+
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit">提交</button>
+                            <button class="btn btn-white" type="submit">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<!-- iCheck -->
+<script src="/static/hp/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- jQuery Validation plugin javascript-->
+<script src="/static/hp/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/static/hp/js/plugins/validate/messages_zh.min.js"></script>
+
+<script src="/static/js/lodash.min.js"></script>
+<script>
+    $(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+        $('form').validate({
+          messages: {
+            username:{
+              required:'请输入用户名'
+            },
+            password:{
+              required:'请输入密码'
+            }
+          },
+          submitHandler:function(form){
+            var $form = $(form);
+            var data = _.reduce($form.serializeArray(), function(result, o){
+              result[o.name] = o.value;
+              return result;
+            }, {});
+
+            var url = $form.attr('action');
+            var type = $form.attr('method')
+            $.ajax({
+              url: url,
+              type: type,
+              data: data,
+              success: function(resp){
+                if(resp.errno == 200){
+                  if(resp.redirect) window.location.href = resp.redirect;
+                }else{
+                  alert(resp.errmsg);
+                }
+              }
+            });
+          }
+        });
+    });
+</script>
+{% endblock %}
