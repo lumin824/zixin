@@ -82,7 +82,7 @@
                 shrinkToFit: true,
                 rowNum: 20,
                 rowList: [10, 20, 30],
-                colNames: ['序号', '名称', '统一社会信用代码', '运费', '总额', '操作'],
+                colNames: ['序号', '名称', '统一社会信用代码', '创建时间', '更新时间', '操作'],
                 colModel: [
                     {
                         name: 'id',
@@ -93,28 +93,26 @@
                     {
                         name: 'name',
                         editable: true,
-                        width: 90,
+                        width: 90
                     },
                     {
                         name: 'uscc',
                         editable: true,
-                        width: 80,
+                        width: 80
                     },
                     {
-                        name: 'tax',
-                        index: 'tax',
-                        editable: true,
+                        name: 'create_time',
+                        editable: false,
                         width: 80,
-                        align: "right",
-                        sorttype: "float"
+                        formatter:'date',
+                        formatoptions: { srcformat:'u', newformat:'Y-m-d H:i:s'}
                     },
                     {
-                        name: 'total',
-                        index: 'total',
-                        editable: true,
+                        name: 'update_time',
+                        editable: false,
                         width: 80,
-                        align: "right",
-                        sorttype: "float"
+                        formatter:'date',
+                        formatoptions: { srcformat:'u', newformat:'Y-m-d H:i:s'}
                     },
                     {
                         name: 'id',
