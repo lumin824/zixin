@@ -17,7 +17,7 @@ export default class extends Base {
     let { key } = this.param();
 
     if(key){
-      let list = await this.model('company').where({'name|uscc':['like',`%${key}%`]}).select();
+      let list = await this.model('company').where({'name|uscc':['like',`%${key}%`]}).limit(0,20).select();
       this.assign('list', list);
     }
 
