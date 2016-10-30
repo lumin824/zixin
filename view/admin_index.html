@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title>H+ 后台主题UI框架 - 主页</title>
+    <title>管理后台 - 税务资信</title>
 
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
@@ -55,12 +55,36 @@
                         <div class="logo-element">H+
                         </div>
                     </li>
-                    {% for o in menuItem %}
+                    {% for o in itemTree %}
                     <li>
+                        {% if o.children %}
+                        <a href="#">
+                          <i class="{{o.icon}}"></i>
+                          <span class="nav-label">{{o.name}}</span>
+                          <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                          {% for p in o.children %}
+                            <li>
+                                {% if p.children %}
+                                <a href="#">{{p.name}}<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                  {% for q in p.children %}
+                                    <li><a class="J_menuItem" href="{{q.href}}" data-index="{{q.href}}">{{q.name}}</a></li>
+                                  {% endfor %}
+                                </ul>
+                                {% else %}
+                                <a class="J_menuItem" href="{{p.href}}" data-index="{{p.href}}">{{p.name}}</a>
+                                {% endif %}
+                            </li>
+                          {% endfor %}
+                        </ul>
+                        {% else %}
                         <a class="J_menuItem" href="{{o.href}}">
                           <i class="{{o.icon}}"></i>
                           <span class="nav-label">{{o.name}}</span>
                         </a>
+                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>
